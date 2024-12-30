@@ -1,0 +1,56 @@
+.container{
+    max-width: 1250px;
+    width: 100%;
+     
+    padding:1rem 0;
+    margin: auto;
+}
+
+.sectionTitle{
+  color: #161515;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+.TestimonialCard{
+  /* border: 1px solid gainsboro; */
+    border-radius: 10px;
+    padding: 0.7rem;
+     
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.image_box{
+  border: 1px solid gainsboro;
+    width: 8rem;
+    height: 8rem;
+    overflow: hidden;
+    border-radius: 5rem;
+}
+
+.image_box > img{
+  width: 100%;
+  height: 100%;
+}
+
+.feedback > p{
+  font-size: 1rem;
+  font-family: inherit;
+  text-align: center;
+  color: #040303;
+  letter-spacing: 1px;
+}
+
+.ratings > svg{
+  color: rgb(255, 217, 0);
+}
+@media screen and (max-width: 482px) {
+    .container{
+       padding: 1rem .5rem;
+    }
+    
+  }

@@ -1,0 +1,63 @@
+.mainContainer {
+  padding: 20px;
+  max-width: 800px;
+ 
+ 
+}
+
+.addressheading {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #334960;
+}
+
+.uiheading {
+  list-style: none;
+  padding: 0;
+}
+
+.addressItem {
+  margin-bottom: 1rem;
+  font-size: small;
+  height: 78px;
+  width: 60%;
+  background-color: #fbfbfb;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  padding: 19px;
+  /* list-style: none; */
+
+}
+
+.backButton {
+  margin-top: 1rem;
+  background-color: #ccc;
+}
+
+.addButton1 {
+  margin-top: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+.radioicon{
+  margin-left: -15px;
+}
+.newaddress{
+  max-width: 218px;
+  text-align: center;
+  margin-left: 113px;
+
+}
+.backaddress{
+  max-width: 218px;
+  text-align: center;
+  margin-left: 272px;
+
+
+}
+ @media (max-width: 600px) {
+  
+ }

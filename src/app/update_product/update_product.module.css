@@ -1,0 +1,52 @@
+.maindiv {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .maindiv div {
+    margin-bottom: 15px;
+  }
+  
+  .maindiv label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .maindiv input[type="text"],
+  .maindiv input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .maindiv input[type="text"]:focus,
+  .maindiv input[type="file"]:focus {
+ 
+    outline: none;
+  }
+  
+  .maindiv input[type="file"] {
+    padding: 3px;
+  }
+  .maindiv button{
+    height: 34px;
+    background-color:  #334960;
+    border-radius: 7px;
+    color: white;
+    cursor: pointer;
+}
+.second{
+  display: flex;
+}

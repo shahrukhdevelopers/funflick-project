@@ -1,0 +1,78 @@
+.main {
+    height: auto; /* Adapt height to content */
+    max-width: 800px; /* Set a maximum width */
+    margin: 20px auto; /* Center horizontally */
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.heading {
+    font-size: 32px;
+    font-family: "Poppins", sans-serif !important;
+    color: #334960;
+}
+.selectcityname{
+    font-size: 19px;
+    font-family: "Poppins", sans-serif !important;
+    color: #334960;
+    margin-top: 10px;
+}
+
+.input {
+    height: 45px;
+    width: 100%;
+    margin-top: 6px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    padding-left: 10px;
+}
+
+.label {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #334960;
+    font-family: "Poppins", sans-serif !important;
+    margin-top: 15px;
+    display: block; /* Ensure proper spacing */
+}
+
+.btn {
+    width: 216px;
+    padding: 10px;
+    background-color: #334960;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    outline: none;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    margin: auto;
+}
+
+.btn:hover {
+    background-color: #1e2e3f;
+}
+
+.btn:focus {
+    background-color: #2b3e54;
+    outline: 2px solid #a0c4ff; /* Accessible focus style */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 376px) {
+    .main {
+        width: 90%; /* Make it relative to the viewport */
+        margin: 20px auto; /* Keep it centered */
+    }
+}
+.BackButton{
+    width: 17%;
+    
+}

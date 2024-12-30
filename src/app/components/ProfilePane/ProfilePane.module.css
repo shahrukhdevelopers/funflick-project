@@ -1,0 +1,38 @@
+.Profilesidemodalcustomclass{
+    height: 100vh;
+    padding: 0px !important;
+}
+
+.Profilesidemodalcustomoverlayclass{
+   z-index: 9999;
+}
+
+.commonInputMainContainer{
+
+}
+
+.commonInputLabel{
+    font-size: 14px;
+    font-weight: 600;
+    color:#334960 ;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.commonInputinput{
+    width: -webkit-fill-available;
+    height: 30px;
+    border: 0.5px solid gray;
+    border-radius: 8px;
+    padding: 12px ;
+    line-height: 12px;
+}
+
+.commonInputinput::placeholder{
+    color:#334960 ;
+    opacity: 0.5;
+    line-height: 12px;
+    padding: 12px;
+    
+}
+

@@ -1,0 +1,77 @@
+/* FooterBot.module.css */
+.main_container {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    width: 100%;
+    
+}
+.footerBG{
+    background-color: #f6f6f8;
+   
+}
+.footer__bot_wrap a:hover,
+.footer__bot_wrap a.selected:not(:hover) {
+  color: #56cfe1;
+}
+.copy{
+  background-color: #334960;
+  color: #878787;
+  font-size: .9rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+
+.footer__bot_wrap,
+.footer__bot .nt_currency ul,
+.footer__bot .nt_currency.cg {
+  background-color: #334960;
+  color: #878787;
+}
+
+.footer__bot a:not(:hover) {
+  color: #878787;
+}
+
+.widget {
+    margin-bottom: 1.5rem;
+  }
+  
+  .title {
+    font-weight: bold;
+    color:#403e3e;
+    margin-bottom: 1rem;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .icon {
+    margin-right: 0.5rem;
+    vertical-align: middle;
+  }
+
+   
+
+  .footer_contact a {
+    color: #878787;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  .footer_contact  {
+    color: #878787;
+    font-size: 14px;
+  }
+
+  .footer_contact a svg{
+    color: #878787;
+    font-size: 25px;
+  }
+   
+  @media screen and (max-width: 482px) {
+    .main_container {
+      
+      padding: 1rem;
+  }
+  }

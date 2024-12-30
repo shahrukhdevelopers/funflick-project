@@ -1,0 +1,255 @@
+.details_container{
+    width: 100%;
+  
+    background: #fffefe!important;
+   
+}
+
+.container{
+    max-width: 1250px;
+    width:100%;
+    margin: 2rem auto;
+}
+
+.border{
+    border: 1px solid;
+}
+
+.title{
+    font-weight: 600;
+    color: #161515;
+}
+
+.instock{
+    font-weight: 600;
+    color: #161515;
+}
+
+.newPrice{
+    font-weight: 600;
+   
+     
+    color: rgb(35, 204, 179);
+  
+}
+
+.oldPrice{
+    text-decoration: line-through;
+    color: #161515;
+}
+
+.savings{
+    font-size: .8rem;
+    color: orangered;
+}
+
+.youSave{
+    font-size: 1rem;
+    color: rgb(35, 204, 179);
+    font-weight: 500;
+}
+
+.grade{
+    font-weight: 600;
+    font-family: inherit;
+    font-size: 1rem;
+    color: rgb(51, 51, 51);
+    
+}
+
+.variationSelection{
+    flex: 1 1 0%;
+    height: 53px;
+    width: 114px;
+    border-radius: 12px;
+    margin-right: 20px;
+    padding: 5px;
+    gap: 3px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 10px 29px;
+    border-width: 1px;
+    background-color: rgb(35, 204, 179);
+    border-color: rgb(35, 204, 179);
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+}
+
+.blackColor{
+    border: 4px solid rgba(255, 255, 255, 1);
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 4rem;
+    background: rgb(52, 52, 52);
+    box-shadow: rgba(0, 0, 0, 0.3) 3px 2px 10px;
+}
+.purpleColor{
+    border: 4px solid rgba(255, 255, 255, 1);
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 4rem;
+    background:rgb(130, 134, 166);
+    box-shadow: rgba(0, 0, 0, 0.3) 3px 2px 10px;
+}
+.puresblackColor{
+    border: 4px solid rgba(255, 255, 255, 1);
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 4rem;
+    background: #000;
+    box-shadow: rgba(0, 0, 0, 0.3) 3px 2px 10px;
+}
+
+.colorName{
+   
+    width: 4rem;
+    text-align: center;
+    font-size: .8rem;
+    margin: .5rem 0;
+}
+
+.productDisplay{
+    height: 400px;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.3) 3px 2px 10px;
+    border-radius: 10px;
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imgBANNER{
+    
+ 
+    width: 100%;
+    height: 100%;
+}
+
+.highlight{
+    gap:2px;
+    width:100%;
+}
+.highBox{
+    
+     flex: 1;
+    width: auto;
+    height: 63px;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(216, 216, 216);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: .5rem 0;
+}
+.highBox > h6{
+    font-size: 1.2rem;
+    color: #161515;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+.highBox > p{
+    font-size: 12px;
+    text-align: center;
+    color: #161515;
+    width: 5rem;
+}
+.leftSide{
+   width: 90%;
+  
+}
+.displayImg{
+     
+    height: 70%;
+    width: 100%;
+}
+
+.btnPrimary{
+    background: rgb(35, 204, 179);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: .5rem;
+}
+.btnPrimary:hover{
+    background: rgb(35, 204, 179);
+}
+.btnWhite{
+    background: rgb(255, 255, 255);
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgb(35, 204, 179);
+    padding: .5rem;
+    border: 1px solid rgb(35, 204, 179);
+}
+.specs{
+    height: 34px;
+    border-width: 2px;
+    border-radius: 12px;
+    padding-right: 10px;
+    padding-left: 10px;
+    justify-content: center;
+    /* border-color: rgb(35, 204, 179); */
+    border: 1px solid rgb(35, 204, 179);
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+
+.specs > h6{
+    font-weight: 600;
+    font-size: .9rem;
+    color: #161515;
+    text-transform: uppercase;
+    line-height: 1rem;
+}
+
+.specBox:nth-child(odd) {
+    background-color: #d4d3d3; /* Grey background color for odd children */
+  }
+
+  .specBox{
+    padding: 0.5rem 1rem;
+    display: flex;
+     
+    font-size: 12px;
+    gap: 12px;
+}
+
+  .specBox > h6{
+    width: fit-content;
+    font-size: .9rem;
+    min-width: 9rem;
+    font-weight: 500;
+    font-family: inherit;
+    color: #000;
+  }
+
+  .specBox >p{
+    font-size: .9rem;
+    
+    font-weight: 500;
+    font-family: inherit;
+    color: #000;
+  }
+
+@media screen and (max-width: 482px) {
+    .container{
+        padding: 1rem;
+    }
+   .productDisplay{
+    width: 100%;
+   } 
+   .highBox{
+    width: auto;
+    flex: 1;
+   }
+   .leftSide{
+    width: 100%;
+   }
+  }
+  

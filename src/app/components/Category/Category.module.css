@@ -1,0 +1,114 @@
+.category_container{
+    width: 100%;
+  
+    background: #334960!important;
+   
+}
+
+.container{
+    width: 100%;
+    max-width: 1250px;
+    margin: auto;
+   
+}
+
+.shopifySection {
+    margin-top: 50px !important;
+    margin-right: auto !important;
+    margin-bottom:50px !important;
+    margin-left: auto !important;
+}
+
+.shipping{
+    display: flex;
+    color:#fff;
+}
+
+.title , .subtText {
+    font-size: 14px;
+}
+
+.sectionTitle{
+    color: #fff;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+.subtText{
+color:#fffc;
+margin-top: .5rem;
+}
+
+.icon{
+    font-size: 2rem;
+}
+
+.rotated_icon {
+    transform: rotate(-36deg); /* Rotate the icon by 45 degrees */
+  }
+  .slide {
+    min-width: 50% !important;
+  }
+
+
+/* For all other screen sizes, display 3 items */
+.slide {
+  min-width: 50% !important;
+}
+  .image_box {
+    position: relative;
+    width: 90%;
+    height: 12.5rem;
+    margin-right: 1rem;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    opacity: 1;
+    transition: all .3s ease-in-out ;
+    margin-right: 1.3rem;
+    border-radius: 10px;
+
+  }
+ .image_box > img {
+    height: 100%;
+    width: 100%;
+    
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust overlay color and opacity as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .overlay h3 {
+    color: #ddd4d4; /* Title color */
+    font-size: 1.3rem; /* Adjust title font size as needed */
+    text-align: center;
+  }
+  
+ 
+  
+  .image_box:hover , .image_box3:hover , .image_box2:hover ,.image_box1:hover , .image_box4:hover{
+    opacity: .9;
+    border-radius: 12px;
+    transform: scale(1.05); /* Adjust zoom level as needed */
+    transition: all .3s ease-in-out ;
+  }
+
+
+  @media screen and (max-width: 482px) {
+    .shopifySection {
+     padding:1rem;
+  }
+
+  }
+ 
