@@ -12,15 +12,17 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
 import CartPane from "../CartPane/CartPane";
 import ProfilePane from "../ProfilePane/ProfilePane";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 
 import {
   cartSlidingPane,
   ProfileSlidingPane,
   headersearchvalue,
+  API_TOKEN,
 } from "../../store/Homepage/HomepageAtom";
 import { url } from "inspector";
+import { doGet } from "@/app/store/api";
 
 const HeaderArray = [
   "About Us",
@@ -29,15 +31,33 @@ const HeaderArray = [
   "Track Order",
   "Invoices",
 ];
-const NewHeaderArray=[{val: "About us", url : "aboutus"},{val: "Categories", url : "product"},{val:"Top Trending",url:"update_product"}
+const NewHeaderArray=[{val: "About us", url : "aboutus"},{val: "Products", url : "product"},{val:"Top Trending",url:"update_product"}
 ,{val: "Track Order", url : "Order_Summary",},{val: "Invoices", url : "Order_page"}];
 const Header = () => {
   const [cartPaneState, setcartSlidingPane] = useAtom<any>(cartSlidingPane);
   const [ProfilePaneState, setProfileSlidingPane] =
     useAtom<any>(ProfileSlidingPane);
     const [search,setsearch]=useAtom<string>(headersearchvalue)
- 
+    const [cartvalue, setcartvalue] = useState<number>(0);
+  console.log(cartvalue,"this is cart vales.....")
 
+
+
+    const cartvaluefetch = async () => {
+      try {
+        const valuesAddress = await doGet("cart", {}, API_TOKEN);
+        // console.log("Fetched cart value123:", valuesAddress);
+        setcartvalue(valuesAddress); // Adjust based on your API response structure
+      } catch (error) {
+        console.error("Error fetching cart value:", error);
+      }
+    };
+  
+    // UseEffect to fetch cart data on component mount
+    useEffect(() => {
+      cartvaluefetch();
+    }, []);
+  
   return (
     <Box className={styles["main-container"]}>
       <Box className={styles.headerDesktop}>
@@ -75,7 +95,7 @@ const Header = () => {
             className={styles.header__desktop__options__icon}
           >
             <span className={styles.header_desktop__options__icon__text}>
-              Cart
+              Cart {cartvalue?.data?.product_ids?.length || 0}
             </span>
             <ShoppingCartOutlinedIcon
               style={{ height: "40px", color: "#334960" }}
