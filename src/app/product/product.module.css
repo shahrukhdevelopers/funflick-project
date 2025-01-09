@@ -649,3 +649,12 @@ font-size: 11px;
             overflow: auto;
             
           }        
+          .customSnackbar {
+            background-color: #4caf50 !important;
+            color: #fff !important;
+            font-size: 16px;
+            border-radius: 8px !important;
+            display: flex;
+            align-items: center;
+          }
+          

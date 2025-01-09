@@ -54,9 +54,10 @@ const Header = () => {
     };
   
     // UseEffect to fetch cart data on component mount
-    useEffect(() => {
-      cartvaluefetch();
-    }, []);
+  cartvaluefetch();
+
+     
+   
   
   return (
     <Box className={styles["main-container"]}>

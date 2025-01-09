@@ -7,6 +7,8 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { doGet } from "../../store/api";
+import Snackbar from "@mui/material/Snackbar";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 interface CartData {
   data: {
@@ -23,6 +25,7 @@ interface CartData {
 const Counter: React.FC = () => {
   const [cartPaneState, setcartSlidingPane] = useAtom(cartSlidingPane);
   const [cartData, setCartData] = useState<CartData | null>(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const fetchCartData = async () => {
     try {
@@ -42,10 +45,12 @@ const Counter: React.FC = () => {
         `https://backendapitoys.com/api/v1/cart?product_id=${_id}`,
         { method: "DELETE", headers: myHeaders }
       );
+      // alert("delete")
 
       if (response.ok) {
         console.log("Item deleted successfully");
         fetchCartData(); // Refresh the cart data after deletion
+        setSnackbarOpen(true);
       } else {
         console.error("Failed to delete item");
       }
@@ -53,10 +58,17 @@ const Counter: React.FC = () => {
       console.error("Error deleting product:", error);
     }
   };
+  const handleSnackbarClose = (
+    _: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") return;
+    setSnackbarOpen(false);
+  };
 
   useEffect(() => {
-    if (cartPaneState) fetchCartData();
-  }, [cartPaneState]);
+  fetchCartData();
+  }, [cartPaneState,fetchCartData]);
 
   return (
     <div>
@@ -87,20 +99,32 @@ const Counter: React.FC = () => {
                 <div className={style.productprice}>
                   ₹{product.offerprice}
                   <del className={style.del}>₹{product.maximumretailprice}</del>
-                  <button
-                    onClick={() => deleteProduct(product._id)}
-                    className={style.Btn}
-                  >
-                    Delete
-                  </button>
+                  <Image onClick={() => deleteProduct(product._id)}
+                     src="/page1icon/x.png" width="30" height="30" className={style.imagecart1} alt="#"></Image>
                 </div>
               </div>
             ))
           ) : (
             <div className={style.emptyCartMessage}>
-              Your cart is empty. <Link href="/products">Browse Products</Link>
+              <Image
+                src="/page1icon/empty-cart.png"
+                alt="Empty Cart"
+                width={120}
+                height={140}
+              />
+              Your cart is empty. <Link href="/product">Browse Products</Link>
             </div>
           )}
+           <Snackbar
+   autoHideDuration={2000}
+        anchorOrigin={{vertical:'top',horizontal:'center'}}
+        open={snackbarOpen}
+        onClose={handleSnackbarClose}
+        message={
+          <span className={style.customSnackbar}>
+            <CheckCircleIcon style={{ marginRight: '8px' }} /> Product removed from cart
+          </span>
+        }></Snackbar>
 
           {cartData?.data?.product_ids?.length > 0 && (
             <div className={style.part1}>
