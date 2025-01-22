@@ -15,21 +15,21 @@ const Counter: React.FC = (props) => {
     const [customerMobileNumber, setCustomerMobileNumber] = useAtom<any>(CustomerMobileNumber);
     const [UserResponseState, setUserResponseState] = useAtom<any>(UserResponse);
     const [showProfile, setshowProfile] = useState<any>(false)
+    /*console.log("here is token",customerMobileNumber,sendOTP)*/
 
-
-    const getLocalStorage = async (key : any) => {
+    const getLocalStorage = async (key: any) => {
         return await localStorage.getItem(key);
     }
- 
+
     useEffect(() => {
-        getLocalStorage('userDetails').then((data: any)=>{
+        getLocalStorage('userDetails').then((data: any) => {
             console.log(JSON.parse(data))
-            if(JSON.parse(data)){
-               setshowProfile(true)
-               setUserResponseState(JSON.parse(data))
+            if (JSON.parse(data)) {
+                setshowProfile(true)
+                setUserResponseState(JSON.parse(data))
             }
-        }).catch((error) =>{
-         
+        }).catch((error) => {
+
         });
     }, [])
 
@@ -62,7 +62,9 @@ const Counter: React.FC = (props) => {
                 }}
             >
                 <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                   {showProfile ? <div> login Profile </div> : <div>
+                    {showProfile ? <div> login Profile </div> : <div>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia minus
+                        quis blanditiis nostrum tenetur, ipsam reprehenderit nobis sint deleniti,
                         <div style={{ background: '#967777c8', display: 'flex', width: '100%', justifyContent: 'center', alignItems: 'center', height: '40px', borderRadius: '8px' }}>
                             <h5 style={{ color: 'white', fontSize: '18px', fontWeight: '500' }}>Login</h5>
                         </div>
@@ -93,6 +95,7 @@ const Counter: React.FC = (props) => {
                                 </div>
                                 <div onClick={handleLoginClick} style={{ border: '1px solid #334960', background: '#334960', marginTop: '36px', height: '30px', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '12px' }}>
                                     <p style={{ color: 'white' }}>Login</p>
+
                                 </div>
                             </div>}
                         {!sendOTP && <div onClick={async () => {
@@ -102,7 +105,7 @@ const Counter: React.FC = (props) => {
                         }} style={{ border: '1px solid #334960', background: '#334960', marginTop: '36px', height: '30px', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: '12px' }}>
                             <p style={{ color: 'white' }}>Send OTP</p>
                         </div>}
-                    </div>  }
+                    </div>}
                 </div>
 
 

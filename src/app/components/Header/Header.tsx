@@ -31,34 +31,37 @@ const HeaderArray = [
   "Track Order",
   "Invoices",
 ];
-const NewHeaderArray=[{val: "About us", url : "aboutus"},{val: "Products", url : "product"},{val:"Top Trending",url:"update_product"}
-,{val: "Track Order", url : "Order_Summary",},{val: "Invoices", url : "Order_page"}];
+const NewHeaderArray = [{ val: "About us", url: "aboutus" }, { val: "Products", url: "product" }, { val: "Top Trending", url: "update_product" }
+  , { val: "Track Order", url: "Order_Summary", }, { val: "Invoices", url: "Order_page" }];
 const Header = () => {
   const [cartPaneState, setcartSlidingPane] = useAtom<any>(cartSlidingPane);
   const [ProfilePaneState, setProfileSlidingPane] =
     useAtom<any>(ProfileSlidingPane);
-    const [search,setsearch]=useAtom<string>(headersearchvalue)
-    const [cartvalue, setcartvalue] = useState<number>(0);
-  console.log(cartvalue,"this is cart vales.....")
+  const [search, setsearch] = useAtom<string>(headersearchvalue)
+  const [cartvalue, setcartvalue] = useState<number>(0);
+  console.log(cartvalue, "this is cart vales.....")
 
 
 
-    const cartvaluefetch = async () => {
-      try {
-        const valuesAddress = await doGet("cart", {}, API_TOKEN);
-        // console.log("Fetched cart value123:", valuesAddress);
-        setcartvalue(valuesAddress); // Adjust based on your API response structure
-      } catch (error) {
-        console.error("Error fetching cart value:", error);
-      }
-    };
-  
-    // UseEffect to fetch cart data on component mount
-  cartvaluefetch();
+  const cartvaluefetch = async () => {
+    try {
+      const valuesAddress = await doGet("cart", {}, API_TOKEN);
+      // console.log("Fetched cart value123:", valuesAddress);
+      setcartvalue(valuesAddress); // Adjust based on your API response structure
+    } catch (error) {
+      console.error("Error fetching cart value:", error);
+    }
+  };
 
-     
-   
-  
+  // UseEffect to fetch cart data on component mount
+  useEffect(() => {
+    cartvaluefetch();
+  }, [])
+
+
+
+
+
   return (
     <Box className={styles["main-container"]}>
       <Box className={styles.headerDesktop}>
@@ -80,7 +83,7 @@ const Header = () => {
                 style={{ height: "40px", color: "#334960" }}
               />
               <form>
-                <input type="text" placeholder="Search Toys" onChange={(e)=>setsearch(e.target.value)}/>
+                <input type="text" placeholder="Search Toys" onChange={(e) => setsearch(e.target.value)} />
               </form>
             </Box>
           </Box>
@@ -96,11 +99,31 @@ const Header = () => {
             className={styles.header__desktop__options__icon}
           >
             <span className={styles.header_desktop__options__icon__text}>
-              Cart {cartvalue?.data?.product_ids?.length || 0}
+              Cart
             </span>
             <ShoppingCartOutlinedIcon
               style={{ height: "40px", color: "#334960" }}
+
             />
+
+         
+            <span
+              style={{
+                backgroundColor: "red",
+                color: "white",
+                height: "16px",
+                width: "17px",
+                textAlign: "center",
+                borderRadius: "15px",
+                position: "absolute",
+                marginLeft: "57px",
+                marginTop: "-41px",
+                display: "inline-block",
+                lineHeight: "16px", // Ensures vertical centering for single-line text
+              }}
+            >
+              {cartvalue?.data?.product_ids?.length || 0}
+            </span>
           </Box>
           <Box
             onClick={() =>
@@ -124,7 +147,7 @@ const Header = () => {
               <Link key={index} className={styles.headerLink} href={`/${item.url}`}>
                 <span style={{ color: "white" }}>{item.val}</span>
               </Link>
-              
+
             ))}
           </div>
           <div

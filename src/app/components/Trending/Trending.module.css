@@ -201,7 +201,7 @@
 }
 
 .cardContent {
-  flex: 1;
+  flex: 0 1;
   padding: .5rem;
   display: flex;
   flex-direction: column;
@@ -210,11 +210,12 @@
 .whiteCardImg {
   width: 50%;
   margin: auto;
-  border: 1px solid gainsboro;
-  border-radius: 10px;
+  /* border: 1px solid gainsboro; */
+  /* border-radius: 10px; */
   overflow: hidden;
-  max-height: 8rem;
+  max-height: 10rem;
   height: 100%;
+
 }
 .whiteCardImg > img {
   width: 100%;

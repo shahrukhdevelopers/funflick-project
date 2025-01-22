@@ -7,11 +7,12 @@ import { useAtom } from 'jotai';
 import { doGet, doPostRaw } from "../store/api"
 import { ProfileSlidingPane, headersearchvalue, filtershowvalues, Genderfilter, Maximumretailpricefilter, API_TOKEN } from '../store/Homepage/HomepageAtom';
 import ReactPaginate from 'react-paginate';
-import Snackbar from '@mui/material/Snackbar';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 
 import CartegoriesFIter from "./cartegories";
+import Link from "next/link";
 
 
 
@@ -34,7 +35,7 @@ const ProDuctpage = () => {
  
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
   // const [snackbarPosition] = useState({ vertical: 'Top', horizontal: 'center' });
-  console.log("here is product page data......", productData)
+  // console.log("here is product page data......", productData)
   const datashowvalue = {
 
 
@@ -42,7 +43,7 @@ const ProDuctpage = () => {
   async function makerequest(page: number) {
     const response = await doGet(`products`, { name: search, limit: itemsPerPage, page: page, offerprice: show, maximumretailprice: showPrice, gender: showGender, })
     setProductData(response)
-    console.log(response, "sssssssssssssssss")
+    // console.log(response, "sssssssssssssssss")
 
     if (response?.total) {
       setPageCount(Math.ceil(response.total / itemsPerPage));
@@ -75,11 +76,11 @@ const ProDuctpage = () => {
 
     // alert("your item is selected")
     console.log(body)
-    // console.log(product._id)
+    // console.log(product._id,"iphone......")
 
     if (userData) {
       // @ts-ignore
-      setProfileSlidingPane(true)
+      setProfileSlidingPane(false)
     } else {
       const res = await doPostRaw("cart", {}, body, API_TOKEN)
 
@@ -91,10 +92,16 @@ const ProDuctpage = () => {
     SetCurrentPage(event.selected + 1);
     makerequest(event.selected + 1);
   };
-  const handleSnackbarClose = (_: any, reason: string) => {
-    if (reason === 'clickaway') return;
-    setSnackbarOpen(false);
-  };
+   const handleSnackbarClose = (
+     event?: React.SyntheticEvent | Event,
+     reason?: SnackbarCloseReason,
+   ) => {
+     if (reason === 'clickaway') {
+       return;
+     }
+ 
+     setSnackbarOpen(false);
+   };
 
   return (
     <div>
@@ -142,7 +149,7 @@ const ProDuctpage = () => {
                     <button onClick={() => onAddToCart(product)} className={styles.btn1}>
                   ADD TO CART
                 </button>
-                      <button className={styles.btn2}>BUY NOW</button>
+                      <button className={styles.btn2}><Link href="/confirm">BUY NOW</Link></button>
                     </div>
 
                 
@@ -177,17 +184,20 @@ const ProDuctpage = () => {
             activeClassName={'active'}
           /></div>
    {/* Snackbar */}
-   <Snackbar
-   autoHideDuration={2000}
-        anchorOrigin={{vertical:'top',horizontal:'center'}}
-        open={snackbarOpen}
-        onClose={handleSnackbarClose}
-        message={
-          <span className={styles.customSnackbar}>
-            <CheckCircleIcon style={{ marginRight: '8px' }} /> Product added to cart!
-          </span>
-        }
-      />
+   <Snackbar open={snackbarOpen} autoHideDuration={2000} onClose={handleSnackbarClose} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
+                  <Alert
+      
+                    onClose={handleSnackbarClose}
+                    severity="success"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                  >
+                    Product added to cart!
+                  </Alert>
+                </Snackbar>
+        
+      
+     
 
       </div>
     </div>

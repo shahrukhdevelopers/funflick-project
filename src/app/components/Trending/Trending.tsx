@@ -1,13 +1,16 @@
-import styles from "./Trending.module.css"; // Import CSS module
-import Card from "./Card";
-import { Box, Typography, Grid } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import styles from "./Trending.module.css";
+import { Box, Typography } from "@mui/material";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Link from "next/link";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { doGet } from "@/app/store/api";
+import Image from "next/image";
 
 interface ICardProps {
   cardData: {
+    id: string; 
     name: string;
     oldPrice: string;
     newPrice: string;
@@ -18,7 +21,6 @@ interface ICardProps {
 
 const responsive = {
   superLargeDesktop: {
-    // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },
     items: 4,
   },
@@ -35,7 +37,41 @@ const responsive = {
     items: 2,
   },
 };
-const Trending = ({ cardData }: ICardProps) => {
+
+const Trending = () => {
+  const [cardData, setCardData] = useState<ICardProps["cardData"]>([]);
+
+  // Fetch Trending Products
+  const fetchTrendingProducts = async () => {
+    try {
+      const response = await doGet("products", { limit: 4 }); // Fetch top any products
+      if (response?.products) {
+        const transformedData = response.products.map((product: any) => {
+          return {
+            id: product._id, // Ensure the ID is included
+            name: product.name,
+            oldPrice: `₹${product.maximumretailprice}`,
+            newPrice: `₹${product.offerprice}`,
+            imgSrc: product.images[0]?.url || "/placeholder-image.png",
+            discount: `${(
+              ((product.maximumretailprice - product.offerprice) /
+                product.maximumretailprice) *
+              100
+            ).toFixed(2)}%`,
+          };
+        });
+
+        setCardData(transformedData);
+      }
+    } catch (error) {
+      console.error("Failed to fetch trending products:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTrendingProducts();
+  }, []);
+
   return (
     <Box className={styles.Trending_container}>
       <Box className={styles.container}>
@@ -54,28 +90,34 @@ const Trending = ({ cardData }: ICardProps) => {
           </Typography>
         </Box>
         <Box my={3}>
-          {/** C A R D C O M P O N E N T */}
-          <Carousel renderDotsOutside={true} autoPlay={false} responsive={responsive} className={styles.caresoul}>
+          <Carousel
+            renderDotsOutside={true}
+            autoPlay={false}
+            responsive={responsive}
+            className={styles.caresoul}
+          >
             {cardData.map((val, index) => (
-              <Link key={index} href="/details">
+              <Link key={index} href={`/details/${val.id}`}>
                 <Box className={styles.whiteCard}>
                   <Box className={styles.whiteCardImg}>
-                    <img src={`/Trending/${val.imgSrc}`} />
+                    <Image
+                      src={val.imgSrc}
+                      alt={val.name}
+                      width={120}
+                      height={100}
+                      placeholder="blur"
+                      blurDataURL="/placeholder-image.png"
+                    />
                   </Box>
 
                   <Box className={styles.cardContent} my={2}>
-                    <Box>
-                      <Typography variant="h6" className={styles.Toyname}>
-                        {val.name}
-                      </Typography>
-                    </Box>
+                    <Typography variant="h6" className={styles.Toyname}>
+                      {val.name}
+                    </Typography>
 
                     <Box mt={2}>
                       <Box className={styles.ToyPrice}>
-                        {" "}
-                        <span className={styles.NewPrice}>
-                          {val.newPrice}
-                        </span>{" "}
+                        <span className={styles.NewPrice}>{val.newPrice}</span>{" "}
                         <span className={styles.oldPrice}>{val.oldPrice}</span>
                       </Box>
                       <Box
@@ -85,7 +127,6 @@ const Trending = ({ cardData }: ICardProps) => {
                       >
                         <Brightness7Icon fontSize="small" />
                         <Typography variant="h6" className={styles.descount}>
-                          {" "}
                           {val.discount} off
                         </Typography>
                       </Box>

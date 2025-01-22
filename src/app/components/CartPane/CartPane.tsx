@@ -9,6 +9,7 @@ import Link from "next/link";
 import { doGet } from "../../store/api";
 import Snackbar from "@mui/material/Snackbar";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import { Alert } from "@mui/material";
 
 interface CartData {
   data: {
@@ -68,7 +69,7 @@ const Counter: React.FC = () => {
 
   useEffect(() => {
   fetchCartData();
-  }, [cartPaneState,fetchCartData]);
+  }, []);
 
   return (
     <div>
@@ -115,17 +116,17 @@ const Counter: React.FC = () => {
               Your cart is empty. <Link href="/product">Browse Products</Link>
             </div>
           )}
-           <Snackbar
-   autoHideDuration={2000}
-        anchorOrigin={{vertical:'top',horizontal:'center'}}
-        open={snackbarOpen}
-        onClose={handleSnackbarClose}
-        message={
-          <span className={style.customSnackbar}>
-            <CheckCircleIcon style={{ marginRight: '8px' }} /> Product removed from cart
-          </span>
-        }></Snackbar>
-
+          <Snackbar open={snackbarOpen} autoHideDuration={2000} onClose={handleSnackbarClose} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
+                            <Alert
+                
+                              onClose={handleSnackbarClose}
+                              severity="success"
+                              variant="filled"
+                              sx={{ width: '100%' }}
+                            >
+                              Product added to cart!
+                            </Alert>
+                          </Snackbar>
           {cartData?.data?.product_ids?.length > 0 && (
             <div className={style.part1}>
               <Link href="/confirm">
