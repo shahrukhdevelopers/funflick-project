@@ -1,14 +1,30 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
 import styles from "./details.module.css";
-import {Divider,Paper} from "@mui/material";
+import { Divider, Paper } from "@mui/material";
 import Link from "next/link";
- 
 
- 
+const PageDetails = ({ product }) => {
+  // Check if product exists and has the necessary properties
+  if (!product || !product.product) {
+    return <div>Loading product details...</div>;
+  }
 
-const PageDetails = () => {
+  const {
+    name,
+    actualPrice,
+    description,
+    keySpecs,
+    offerprice,
+    totalMrp,
+    totalActualPrice,
+    images,
+    maximumretailprice
+  } = product.product;
 
- 
+  // Calculate the discount percentage
+  const discount = (((maximumretailprice - offerprice) / maximumretailprice) * 100).toFixed(2);
+  const save=((offerprice-maximumretailprice))
+  // const imgSrc= product.images[0]?.url || "/placeholder-image.png",
 
   return (
     <Box className={styles.details_container}>
@@ -24,9 +40,11 @@ const PageDetails = () => {
                   justifyContent="center"
                 >
                   <img
-                    src="/category/flying.webp"
+                    src={product.product.images[0]?.url || "/category/flying.webp"}  // Use fallback image if not available
                     className={styles.imgBANNER}
+                    alt={name}
                   />
+                  
                 </Box>
                 <Box className={styles.highlight} display="flex">
                   <Box className={styles.highBox}>
@@ -36,7 +54,7 @@ const PageDetails = () => {
                     </Typography>
                   </Box>
                   <Box className={styles.highBox}>
-                    <Typography variant="h6"> 3</Typography>
+                    <Typography variant="h6">3</Typography>
                     <Typography>
                       Days <br /> Replacement
                     </Typography>
@@ -44,13 +62,12 @@ const PageDetails = () => {
                   <Box className={styles.highBox}>
                     <Typography variant="h6">6</Typography>
                     <Typography>
-                      {" "}
-                      Months <br /> Warranty{" "}
+                      Months <br /> Warranty
                     </Typography>
                   </Box>
                   <Box className={styles.highBox}>
                     <Typography variant="h6">COD</Typography>
-                    <Typography> Available</Typography>
+                    <Typography>Available</Typography>
                   </Box>
                 </Box>
               </Box>
@@ -65,21 +82,21 @@ const PageDetails = () => {
                 </Button>
                 <Box my={1} />
                 <Link href="/checkout">
-                <Button
-                  className={styles.btnWhite}
-                  variant="outlined"
-                  color="primary"
-                  fullWidth
-                >
-                  Buy Now
-                </Button>
+                  <Button
+                    className={styles.btnWhite}
+                    variant="outlined"
+                    color="primary"
+                    fullWidth
+                  >
+                    Buy Now
+                  </Button>
                 </Link>
-                
               </Box>
             </Box>
           </Grid>
+
           <Grid item lg={8} md={8} xs={12}>
-            <Box className="">
+            <Box>
               <Box
                 my={2}
                 display="flex"
@@ -87,10 +104,10 @@ const PageDetails = () => {
                 justifyContent="space-between"
               >
                 <Typography variant="h6" className={styles.title}>
-                  Xiaomi Redmi 11 Prime Refurbished
+                  {name || "Product Name"}
                 </Typography>
                 <Typography className={styles.instock} variant="body1">
-                  in stock
+                  In Stock
                 </Typography>
               </Box>
               <Box
@@ -101,7 +118,7 @@ const PageDetails = () => {
                 gap={1}
               >
                 <Typography variant="h5" className={styles.newPrice}>
-                  ₹ 6,799{" "}
+                  ₹ {offerprice || "N/A"}
                 </Typography>
                 <Typography variant="h6" className={styles.oldPrice}>
                   ₹ 14,999
@@ -114,7 +131,7 @@ const PageDetails = () => {
                 justifyContent="space-between"
               >
                 <Typography variant="h6" className={styles.savings}>
-                  54.7% off
+                  {discount}% off
                 </Typography>
               </Box>
               <Box
@@ -124,10 +141,11 @@ const PageDetails = () => {
                 justifyContent="space-between"
               >
                 <Typography variant="h6" className={styles.youSave}>
-                  You save ₹ 8,200.00
+                  You save ₹ {save}
                 </Typography>
               </Box>
             </Box>
+
             <Divider />
             <Box my={2} className="select Grade">
               <Box
@@ -139,7 +157,6 @@ const PageDetails = () => {
                 <Typography variant="h6" className={styles.grade}>
                   Select Grade
                 </Typography>
-
                 <Typography variant="body2" className={styles.newPrice}>
                   View details
                 </Typography>
@@ -147,7 +164,7 @@ const PageDetails = () => {
 
               <Box className={styles.variationSelection}>
                 <span>SuperB</span>
-                <Typography>₹ 6,799</Typography>
+                <Typography>₹ {actualPrice || "N/A"}</Typography>
               </Box>
             </Box>
 
@@ -165,6 +182,7 @@ const PageDetails = () => {
               </Box>
 
               <Box p={1} display="flex" gap={3}>
+                {/* Color Selection */}
                 <Box>
                   <Box className={styles.blackColor}></Box>
                   <Typography variant="body1" className={styles.colorName}>
@@ -193,42 +211,20 @@ const PageDetails = () => {
         <Box my={2} />
         <Box>
           <Box className={styles.specs}>
-          <Typography variant="h6">key specification</Typography>
+            <Typography variant="h6">Key Specifications</Typography>
           </Box>
-        
 
           <Paper elevation={3} borderRadius={2} component={Box} my={2}>
-      <Box  borderRadius={2}   overflow="hidden">
-        <Box className={styles.specBox}  >
-          <Typography variant="h6">Display</Typography>
-          <Typography variant="body1">16.71 cm (6.58 inch) 2408 x 1080 Pixels</Typography>
-        </Box>
-        <Box className={styles.specBox}  >
-          <Typography variant="h6">Rear Camera</Typography>
-          <Typography variant="body1">50MP + 2MP + 2MP</Typography>
-        </Box>
-        <Box className={styles.specBox}  >
-          <Typography variant="h6">Front Camera</Typography>
-          <Typography variant="body1">8MP Front Camera</Typography>
-        </Box>
-        <Box className={styles.specBox}  >
-          <Typography variant="h6">Storage</Typography>
-          <Typography variant="body1">64GB</Typography>
-        </Box>
-        <Box className={styles.specBox}  >
-          <Typography variant="h6">Battery</Typography>
-          <Typography variant="body1">5000 mAh</Typography>
-        </Box>
-        <Box className={styles.specBox}  >
-          <Typography variant="h6">Processor</Typography>
-          <Typography variant="body1">Helio G99</Typography>
-        </Box>
-        <Box className={styles.specBox}  >
-          <Typography variant="h6">OS</Typography>
-          <Typography variant="body1">Android 12</Typography>
-        </Box>
-      </Box>
-    </Paper>
+            <Box borderRadius={2} overflow="hidden">
+              {/* Render key specifications */}
+              {keySpecs && Object.entries(keySpecs).map(([key, value]) => (
+                <Box className={styles.specBox} key={key}>
+                  <Typography variant="h6">{key}</Typography>
+                  <Typography variant="body1">{value}</Typography>
+                </Box>
+              ))}
+            </Box>
+          </Paper>
         </Box>
       </Box>
     </Box>
