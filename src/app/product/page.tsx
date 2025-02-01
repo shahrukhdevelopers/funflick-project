@@ -67,6 +67,7 @@ const ProDuctpage = () => {
   );
 
   const onAddToCart = async (product: any) => {
+
     const body = {
 
       "product_ids": [`${product._id}`]
@@ -78,12 +79,13 @@ const ProDuctpage = () => {
     console.log(body)
     // console.log(product._id,"iphone......")
 
-    if (userData) {
+    if  (!userData) {
       // @ts-ignore
+      // console.log("userdata",userData),
       setProfileSlidingPane(false)
     } else {
       const res = await doPostRaw("cart", {}, body, API_TOKEN)
-
+console.log("hello",res)
     }
     setSnackbarOpen(true);
 
@@ -117,7 +119,7 @@ const ProDuctpage = () => {
 
         {productData?.products?.map((product: any, i: number) => {
           const discount = ((product.maximumretailprice - product.offerprice) / product.maximumretailprice) * 100;
-          console.log(product.images)
+          // console.log(product.images)
           return (
             <div key={i} className={styles.contanier}>
               <div className={styles.rightside}>
@@ -125,7 +127,7 @@ const ProDuctpage = () => {
                   <div className={styles.card1}>
 
                     <div className={styles.imageproduct}>
-                      <Image
+                    <Link href={`/details/${product._id}`}> <Image
 
                         alt="product Image"
                         className={styles.imggecart}
@@ -134,7 +136,7 @@ const ProDuctpage = () => {
                         height="100"
                         width="120"
                         priority
-                      ></Image></div>
+                      ></Image></Link></div>
                     <p className={styles.text}>{product.name}</p>
                     <p className={styles.text1}>{product.description}</p>
                     <p className={styles.Special}>Special Price</p>

@@ -1,13 +1,19 @@
 "use client";
 
-import React, { useState } from 'react';
-import styles from './Order_page.module.css';
-import Image from 'next/image';
-import Confirm from '../confirm/page';
+import React, { useState } from "react";
+import styles from "./Order_page.module.css";
+import Image from "next/image";
+import Confirm from "../confirm/page";
+import Button from "../components/CommonComponents/Button";
+import Link from "next/link";
 
 const Page = () => {
- 
- 
+  const [quantity, setQuantity] = useState(1);
+
+  const increaseQuantity = () => setQuantity(quantity + 1);
+  const decreaseQuantity = () => {
+    if (quantity > 1) setQuantity(quantity - 1);
+  };
 
   return (
     <div className={styles.main}>
@@ -24,73 +30,96 @@ const Page = () => {
         </div>
       </div>
       <div className={styles.flexremove}>
-      <div className={styles.part3}>
-        <div className={styles.image}>
-          <Image
-            alt="product Image"
-            className={styles.imggecart}
-            src={'/page1icon/smartwatch3.png'}
-            width={120}
-            height={100}
-            layout="responsive"
-          />
-         
-        </div>
-        <div className={styles.productdetails}>
-          <strong className={styles.productDefinition}>
-            This is a very good product
-          </strong>
-          <p>Watch</p>
-          <p>Seller: Shahrukh</p>
-          <span className={styles.discountOneLine}>
-            <del>₹1900</del> ₹1400
-            <p className={styles.discount1}>66% Off 3 offers available</p>
-          </span>
-          <div className={styles.saveAndRemove}>
-         
-           
+        <div className={styles.part3}>
+          <div className={styles.image}>
+            <Image
+              alt="product Image"
+              className={styles.imggecart}
+              src={"/page1icon/smartwatch3.png"}
+              width={120}
+              height={100}
+              layout="responsive"
+            />
+          </div>
+          <div className={styles.productdetails}>
+            <strong className={styles.productDefinition}>
+              This is a very good product
+            </strong>
+            <p>Watch</p>
+            <p>Seller: Shahrukh</p>
+            <span className={styles.discountOneLine}>
+              <del>₹1900</del> ₹1400
+              <p className={styles.discount1}>66% Off 3 offers available</p>
+            </span>
+
+            
+
+            <div className={styles.saveAndRemove}></div>
+          </div>
+          <div>
+            Delivery by Tue Dec 17 | ₹40{" "}
+            <span className={styles.delivery}> Free</span>
+          </div>
+          <div className={styles.flexremove}>
+            <button className={styles.rmovebtn}>
+              Remove
+            </button>
+            <div className={styles.quantityContainer}>
+              <button
+                className={styles.quantityBtn}
+                onClick={decreaseQuantity}
+               
+              >
+                -
+              </button>
+              <span className={styles.quantity} aria-live="polite">
+                {quantity}
+              </span>
+              <button
+                className={styles.quantityBtn}
+                onClick={increaseQuantity}
+                
+              >
+                +
+              </button>
+            </div>
           </div>
         </div>
-        <div>
-          Delivery by Tue Dec 17 | ₹40 <span className={styles.delivery}> Free</span>
-        
-        </div>
-        <div className={styles.flexremove}> <button className={styles.rmovebtn}>Remove</button></div>
-      
-      </div>
-      
-
-
-
-
-
       </div>
       <div>
-      <div className={styles.priceDetails}>
-  <h3>Price Details</h3>
-  <div className={styles.detailRow}>
-    <span>Price</span>
-    <span>₹2700</span>
-  </div>
-  <div className={styles.detailRow}>
-    <span>Discount</span>
-    <span className={styles.discount}>−₹1100</span>
-  </div>
-  <div className={styles.detailRow}>
-    <span>Delivery Charges</span>
-    <span className={styles.delivery}>₹0 <span className={styles.free}>Free</span></span>
-  </div>
-  <div className={styles.detailRow}>
-    <span>Platform Fee</span>
-    <span>₹3</span>
-  </div>
-  <hr />
-  <div className={styles.totalRow}>
-    <strong>Total Amount</strong>
-    <strong>₹1603</strong>
-  </div>
-</div>
+        <div className={styles.priceDetails}>
+          <h3>Price Details</h3>
+          <div className={styles.detailRow}>
+            <span>Price</span>
+            <span>₹2700</span>
+          </div>
+          <div className={styles.detailRow}>
+            <span>Discount</span>
+            <span className={styles.discount}>−₹1100</span>
+          </div>
+          <div className={styles.detailRow}>
+            <span>Delivery Charges</span>
+            <span className={styles.delivery}>
+              ₹0 <span className={styles.free}>Free</span>
+            </span>
+          </div>
+          <div className={styles.detailRow}>
+            <span>Platform Fee</span>
+            <span>₹3</span>
+          </div>
+          <hr />
+          <div className={styles.totalRow}>
+            <strong>Total Amount</strong>
+            <strong>₹1603</strong>
+          </div>
+        </div>
 
+        <Link href="orderplace">
+            <Button
+              text="Order Place"
+              
+          
+              /></Link>
       </div>
     </div>
   );

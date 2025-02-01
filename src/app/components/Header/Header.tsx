@@ -39,7 +39,7 @@ const Header = () => {
     useAtom<any>(ProfileSlidingPane);
   const [search, setsearch] = useAtom<string>(headersearchvalue)
   const [cartvalue, setcartvalue] = useState<number>(0);
-  console.log(cartvalue, "this is cart vales.....")
+  // console.log(cartvalue, "this is cart vales.....")
 
 
 

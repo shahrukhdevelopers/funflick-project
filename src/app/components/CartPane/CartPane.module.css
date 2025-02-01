@@ -61,19 +61,20 @@
 
 /* Product Price */
 .productprice {
-  /* flex: 1; */
-  font-size: 0.9rem;
-  color: #334960;
-  font-weight: bold;
-  text-align: right;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Spacing between elements */
+  font-size: 1rem; /* Adjust the font size */
+  font-weight: bold; /* Make the price stand out */
+  color:#334960; /* Highlight the offer price in red */
+  margin-top: 5px;
 }
-
-/* .del {
-  font-size: 0.8rem;
-  color: #d9d9d9;
-  margin-left: 0.5rem;
-  text-decoration: line-through;
-} */
+.del {
+  font-size: 0.9rem; /* Slightly smaller font */
+  color: #aaa; /* Subtle color for the original price */
+  text-decoration: line-through; /* Strikethrough style */
+  margin-left: 5px; /* Space between offer price and original price */
+}
 
 /* Remove Button */
 .Btn {
@@ -150,19 +151,16 @@ color:  #334960; /* Blue color for the link */
 .emptyCartMessage a:hover {
 text-decoration: underline;
 }
-.del {
-  margin-left: 5px;
-  font-size: 12px;
-  color: #888;
-  text-decoration: line-through;
-}
 
 .imagecart1 {
-  cursor: pointer;
-  margin-left: 10px;
-  height: 17px;
-  width: 18px;
-
+  width: 14px;
+  height: 14px;/* Icon height */
+  cursor: pointer; /* Pointer cursor for interactivity */
+  transition: transform 0.2s ease, opacity 0.2s ease; /* Smooth hover effects */
+}
+.imagecart1:hover {
+  transform: scale(1.1); /* Slight zoom effect on hover */
+  opacity: 0.8; /* Reduced opacity for hover feedback */
 }
 
 @media (max-width: 768px) {

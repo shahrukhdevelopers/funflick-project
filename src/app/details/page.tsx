@@ -1,7 +1,11 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+"use client";
+import React, { useState, useEffect } from "react";
+import { Box, Button, Grid, Typography, Snackbar, Alert, Divider, Paper } from "@mui/material";
 import styles from "./details.module.css";
-import { Divider, Paper } from "@mui/material";
 import Link from "next/link";
+import { useAtom } from "jotai";
+import { doPostRaw } from "../store/api";
+import { ProfileSlidingPane, API_TOKEN } from "../store/Homepage/HomepageAtom";
 
 const PageDetails = ({ product }) => {
   // Check if product exists and has the necessary properties
@@ -18,14 +22,43 @@ const PageDetails = ({ product }) => {
     totalMrp,
     totalActualPrice,
     images,
-    maximumretailprice
-  } = product.product;
+    maximumretailprice,
+    seller  } = product.product;
 
   // Calculate the discount percentage
   const discount = (((maximumretailprice - offerprice) / maximumretailprice) * 100).toFixed(2);
-  const save=((offerprice-maximumretailprice))
+  const save=(maximumretailprice-offerprice)
   // const imgSrc= product.images[0]?.url || "/placeholder-image.png",
+  const [userData, setUserData] = useState<any>(null);
+  const [profilePaneState, setProfileSlidingPane] = useAtom(ProfileSlidingPane);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const data = await localStorage.getItem("userDetails");
+      if (data) setUserData(JSON.parse(data));
+    };
+    fetchUserData();
+  }, []);
+
+  const onAddToCart = async () => {
+    const body = { product_ids: [`${product.product._id}`] };
+
+    if (!userData) {
+      setProfileSlidingPane(false);
+    } else {
+      try {
+        const res = await doPostRaw("cart", {}, body, API_TOKEN);
+        console.log("Cart Response:", res);
+        setSnackbarOpen(true);
+      } catch (error) {
+        console.error("Error adding to cart:", error);
+      }
+    }
+  };
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
   return (
     <Box className={styles.details_container}>
       <Box className={styles.container}>
@@ -77,6 +110,7 @@ const PageDetails = ({ product }) => {
                   className={styles.btnPrimary}
                   variant="contained"
                   color="primary"
+                  onClick={onAddToCart}
                 >
                   Add to cart
                 </Button>
@@ -121,7 +155,7 @@ const PageDetails = ({ product }) => {
                   ₹ {offerprice || "N/A"}
                 </Typography>
                 <Typography variant="h6" className={styles.oldPrice}>
-                  ₹ 14,999
+              {maximumretailprice}
                 </Typography>
               </Box>
               <Box
@@ -141,7 +175,7 @@ const PageDetails = ({ product }) => {
                 justifyContent="space-between"
               >
                 <Typography variant="h6" className={styles.youSave}>
-                  You save ₹ {save}
+                  You save ₹{save}
                 </Typography>
               </Box>
             </Box>
@@ -155,7 +189,7 @@ const PageDetails = ({ product }) => {
                 my={2}
               >
                 <Typography variant="h6" className={styles.grade}>
-                  Select Grade
+                Seller :{seller}
                 </Typography>
                 <Typography variant="body2" className={styles.newPrice}>
                   View details
@@ -209,22 +243,51 @@ const PageDetails = ({ product }) => {
         <Box my={2} />
         <Divider />
         <Box my={2} />
-        <Box>
+       <Box>
           <Box className={styles.specs}>
-            <Typography variant="h6">Key Specifications</Typography>
+          <Typography variant="h6">key specification</Typography>
           </Box>
+        
 
           <Paper elevation={3} borderRadius={2} component={Box} my={2}>
-            <Box borderRadius={2} overflow="hidden">
-              {/* Render key specifications */}
-              {keySpecs && Object.entries(keySpecs).map(([key, value]) => (
-                <Box className={styles.specBox} key={key}>
-                  <Typography variant="h6">{key}</Typography>
-                  <Typography variant="body1">{value}</Typography>
-                </Box>
-              ))}
-            </Box>
-          </Paper>
+      <Box  borderRadius={2}   overflow="hidden">
+        <Box className={styles.specBox}  >
+          <Typography variant="h6">Display</Typography>
+          <Typography variant="body1">1.3" / 1.4" / 1.5" AMOLED / LCD</Typography>
+        </Box>
+        <Box className={styles.specBox}  >
+          <Typography variant="h6">Battery Life</Typography>
+          <Typography variant="body1">3-7 days (Depends on Usage)</Typography>
+        </Box>
+        <Box className={styles.specBox}  >
+          <Typography variant="h6">Touchscreen</Typography>
+          <Typography variant="body1"> Yes</Typography>
+        </Box>
+        <Box className={styles.specBox}  >
+          <Typography variant="h6">Strap Material</Typography>
+          <Typography variant="body1"> Silicone / Leather / Stainless Steel</Typography>
+        </Box>
+        <Box className={styles.specBox}  >
+          <Typography variant="h6">Charging Type</Typography>
+          <Typography variant="body1">Magnetic / Wireless</Typography>
+        </Box>
+        <Box className={styles.specBox}  >
+          <Typography variant="h6">RAM & Storage</Typography>
+          <Typography variant="body1">512MB - 2GB RAM, 4GB - 16GB Storage</Typography>
+        </Box>
+        <Box className={styles.specBox}  >
+          <Typography variant="h6">Water Resistance </Typography>
+          <Typography variant="body1">IP67 / IP68 / 5ATM</Typography>
+        </Box>
+      
+      </Box>
+    </Paper>
+     {/* Snackbar for Cart Notification */}
+     <Snackbar open={snackbarOpen} autoHideDuration={2000} onClose={handleSnackbarClose}anchorOrigin={{ vertical: "top", horizontal: "center" }}>
+          <Alert onClose={handleSnackbarClose} severity="success" variant="filled">
+            Product added to cart!
+          </Alert>
+        </Snackbar>
         </Box>
       </Box>
     </Box>

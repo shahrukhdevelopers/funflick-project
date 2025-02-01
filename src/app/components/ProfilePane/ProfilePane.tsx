@@ -23,7 +23,7 @@ const Counter: React.FC = (props) => {
 
     useEffect(() => {
         getLocalStorage('userDetails').then((data: any) => {
-            console.log(JSON.parse(data))
+            // console.log(JSON.parse(data))
             if (JSON.parse(data)) {
                 setshowProfile(true)
                 setUserResponseState(JSON.parse(data))

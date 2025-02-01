@@ -11,6 +11,7 @@ interface PriceData {
   deliveryCharges: number;
   totalAmount: number;
   savings: number;
+  data:any
 }
 
 const Confirm = () => {
@@ -18,7 +19,7 @@ const Confirm = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  console.log(setPriceData,"price in values  sssssssssssssss")
+  // console.log(setPriceData,"price in values  sssssssssssssss")
 
   useEffect(() => {
     const myHeaders = new Headers();

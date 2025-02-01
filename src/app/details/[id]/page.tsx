@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import PageDetails from '../page';  // Make sure to import your PageDetails component
 
 const Page = ({ params }) => {
-  console.log(params, "params");
+  // console.log(params, "params");
 
   const [product, setProduct] = useState(null);  // Store the fetched product data
   const [loading, setLoading] = useState(true);  // Manage loading state
